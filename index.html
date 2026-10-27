@@ -7,34 +7,557 @@
 
   <title>Badipati Anil Kumar | Software Engineer & Data Analyst Portfolio</title>
   <meta content="Portfolio of Badipati Anil Kumar - Software Engineer and Data Analyst specializing in Python, SQL, Power BI, and Data Engineering." name="description">
-  <meta content="Badipati Anil Kumar, Software Engineer, Data Analyst, Python, SQL, MySQL, Power BI, Portfolio" name="keywords">
+  <meta content="Badipati Anil Kumar, Software Engineer, Data Analyst, Python, SQL, MySQL, Power BI, AI, Portfolio" name="keywords">
 
   <!-- Favicons -->
   <link href="favicon.png" rel="icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- Bootstrap 5.3 & Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: DevFolio
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(22, 36, 65, 0.85);
+      --border-card: rgba(56, 189, 248, 0.15);
+      --border-card-hover: rgba(56, 189, 248, 0.45);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Fixed Modern Glass Navbar */
+    #navbar-custom {
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-link-custom {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link-custom:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Hero Section with Interactive AI Canvas */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px 0;
+      background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.08) 0%, rgba(8, 12, 20, 0) 70%),
+                  radial-gradient(circle at 80% 60%, rgba(168, 85, 247, 0.08) 0%, rgba(8, 12, 20, 0) 60%),
+                  var(--bg-dark);
+      overflow: hidden;
+    }
+
+    #ai-neural-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* AI Live Status Badge */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-cyan);
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+    }
+
+    .hero-title {
+      font-size: 3.25rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 75%, var(--accent-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      min-height: 1.8rem;
+    }
+
+    .typewriter-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--accent-cyan);
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Interactive AI Query Terminal */
+    .ai-terminal {
+      background: rgba(10, 15, 29, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.12);
+      overflow: hidden;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .terminal-header {
+      background: rgba(15, 23, 42, 0.95);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .terminal-title {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .terminal-body {
+      padding: 18px 20px;
+      font-size: 0.85rem;
+    }
+
+    .terminal-line {
+      margin-bottom: 12px;
+    }
+
+    .prompt-label {
+      color: var(--accent-purple);
+      font-weight: 600;
+    }
+
+    .prompt-text {
+      color: #e2e8f0;
+    }
+
+    .ai-pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-cyan);
+      font-size: 0.78rem;
+      margin: 6px 0;
+    }
+
+    .sql-output-box {
+      background: rgba(2, 6, 23, 0.85);
+      border-left: 3px solid var(--accent-cyan);
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: #38bdf8;
+      font-size: 0.82rem;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .terminal-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-terminal {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #fff;
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+
+    .btn-terminal:hover {
+      background: var(--accent-cyan);
+      color: #080c14;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Buttons */
+    .btn-glow-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-glow-primary:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn-outline-custom {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-custom:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    /* Section Styling */
+    section {
+      padding: 90px 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      backdrop-filter: blur(14px);
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .glass-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.12);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Feature Icons */
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Skill Bars */
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .skill-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      transition: width 1s ease;
+    }
+
+    /* Milestone Counters */
+    .milestone-box {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+    }
+
+    .milestone-number {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 0.25rem;
+      letter-spacing: -1px;
+    }
+
+    .milestone-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+    }
+
+    /* Project Cards */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.15);
+    }
+
+    .project-img-box {
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .project-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-img-box img {
+      transform: scale(1.05);
+    }
+
+    .project-tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(8, 12, 20, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-cyan);
+      backdrop-filter: blur(8px);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-tech {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.76rem;
+      color: var(--accent-purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: gap 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: #fff;
+      gap: 10px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2.5rem 0;
+      background: #05080f;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+  </style>
 </head>
+
+<!-- IBM watsonx Assistant Widget Integration Script -->
 <script>
   window.watsonAssistantChatOptions = {
-    integrationID: "68b92fa7-303c-4a3d-b87e-7b7ea36a492a", // The ID of this integration.
-    region: "au-syd", // The region your integration is hosted in.
-    serviceInstanceID: "d48b745b-0bde-449d-939c-10cc354d2003", // The ID of your service instance.
+    integrationID: "68b92fa7-303c-4a3d-b87e-7b7ea36a492a",
+    region: "au-syd",
+    serviceInstanceID: "d48b745b-0bde-449d-939c-10cc354d2003",
     onLoad: async (instance) => { await instance.render(); }
   };
   setTimeout(function(){
@@ -43,656 +566,718 @@
     document.head.appendChild(t);
   });
 </script>
+
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
+  <!-- Navigation -->
+  <nav id="navbar-custom" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="index.html">Anil Kumar</a></h1>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#skills-section">Competencies</a></li>
-          <li><a class="nav-link scrollto" href="#work">Projects</a></li>
-          <li><a class="nav-link scrollto" href="#certifications">Education & Certs</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <div id="hero" class="hero route bg-image" style="background-image: url(hero-bg.jpg)">
-    <div class="overlay-itro"></div>
-    <div class="hero-content display-table">
-      <div class="table-cell">
-        <div class="container">
-          <h1 class="hero-title mb-4">Badipati Anil Kumar</h1>
-          <p class="hero-subtitle"><span class="typed" data-typed-items="Software Engineer, SQL with Python Developer, Data Analyst, Power BI Developer"></span></p>
-          <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#work" role="button">View Projects</a></p>
-        </div>
+      <a href="index.html" class="brand-logo">Anil<span>.AI</span></a>
+      <div class="d-none d-md-flex align-items-center">
+        <a class="nav-link-custom" href="#hero">Home</a>
+        <a class="nav-link-custom" href="#about">About</a>
+        <a class="nav-link-custom" href="#skills">Skills</a>
+        <a class="nav-link-custom" href="#projects">Projects</a>
+        <a class="nav-link-custom" href="#certifications">Certifications</a>
+        <a class="nav-link-custom" href="#contact">Contact</a>
       </div>
     </div>
-  </div><!-- End Hero Section -->
+  </nav>
 
-  <main id="main">
+  <!-- Hero Section with Dynamic AI Neural Mesh Canvas -->
+  <section id="hero">
+    <canvas id="ai-neural-canvas"></canvas>
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="box-shadow-full">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-sm-6 col-md-5">
-                      <div class="about-img">
-                        <img src="testimonial-2.jpg" class="img-fluid rounded b-shadow-a" alt="Badipati Anil Kumar">
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-7">
-                      <div class="about-info">
-                        <p><span class="title-s">Name: </span> <span>Badipati Anil Kumar</span></p>
-                        <p><span class="title-s">Role: </span> <span>Software Engineer / Data Analyst</span></p>
-                        <p><span class="title-s">Degree: </span> <span>B.E. Computer Science & Eng. (2025)</span></p>
-                        <p><span class="title-s">Location: </span> <span>Andhra Pradesh, India</span></p>
-                        <p><span class="title-s">Email: </span> <span><a href="mailto:anilkumarbadipati4362@gmail.com">anilkumarbadipati4362@gmail.com</a></span></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="skill-mf">
-                    <p class="title-s">Technical Skills</p>
-                    <span>Python (Pandas, NumPy, Matplotlib)</span> <span class="pull-right">85%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>SQL / MySQL (Joins, Queries, Schema Design)</span> <span class="pull-right">90%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Power BI & Data Modeling (DAX, Power Query)</span> <span class="pull-right">80%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Git & Version Control</span> <span class="pull-right">85%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>IBM watsonx Assistant & Watson Studio</span> <span class="pull-right">75%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="ai-badge">
+            <span class="pulse-dot"></span>
+            AI & Data Engineering Copilot Online
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Badipati Anil Kumar</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            <span id="typewriter-text"></span><span class="typewriter-cursor">|</span>
+          </p>
+
+          <p class="text-secondary mb-4" style="font-size: 1.05rem; max-width: 520px;">
+            B.E. Computer Science graduate specialized in relational database engineering, Python data pipelines, exploratory analytics, and conversational AI integrations.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#projects" class="btn-glow-primary">
+              <i class="bi bi-cpu"></i> Explore Projects
+            </a>
+            <a href="https://github.com/Anilkumar4516" target="_blank" rel="noopener" class="btn-outline-custom">
+              <i class="bi bi-github"></i> GitHub Profile
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive AI Query Simulation Widget -->
+        <div class="col-lg-6">
+          <div class="ai-terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
+              </div>
+              <span class="terminal-title">neural-sql-assistant // live-inference</span>
+              <span class="badge bg-dark text-info border border-info" style="font-size: 0.68rem;">v2.4 active</span>
+            </div>
+
+            <div class="terminal-body">
+              <div class="terminal-line">
+                <span class="prompt-label">USER_PROMPT &gt;</span>
+                <span id="terminal-prompt" class="prompt-text">"Calculate customer cohort retention and top 5 revenue contributors in Q3"</span>
+              </div>
+
+              <div id="terminal-pipeline">
+                <div class="ai-pipeline-step">
+                  <i class="bi bi-check2-circle text-success"></i>
+                  <span>[NLP Encoder] Tokenized intent & mapped entities -> 'customers', 'orders'</span>
                 </div>
-                <div class="col-md-6">
-                  <div class="about-me pt-4 pt-md-0">
-                    <div class="title-box-2">
-                      <h5 class="title-left">
-                        About Me
-                      </h5>
-                    </div>
-                    <p class="lead">
-                      I am a Computer Science and Engineering graduate (B.E. 2025) from Nehru Institute of Engineering and Technology, focused on data engineering, SQL query optimization, and Python data pipelines.
-                    </p>
-                    <p class="lead">
-                      During my internship as an <strong>SQL with Python Developer</strong> at Algonex IT Solutions, I wrote relational SQL queries to extract, filter, join, and aggregate complex datasets, developing automated Python scripts for data cleaning and transformation.
-                    </p>
-                    <p class="lead">
-                      I also completed a 10-week <strong>Data Engineering Virtual Internship</strong> supported by AWS Academy (AICTE-EduSkills), building solid fundamentals in cloud infrastructure and data processing workflows.
-                    </p>
-                    <p class="lead">
-                      I enjoy turning raw, messy datasets into structured models, reliable database schemas, and actionable business intelligence dashboards.
-                    </p>
-                  </div>
+                <div class="ai-pipeline-step">
+                  <i class="bi bi-check2-circle text-success"></i>
+                  <span>[Schema Graph] Inferred foreign keys: customers.id = orders.customer_id</span>
                 </div>
+                <div class="ai-pipeline-step">
+                  <i class="bi bi-lightning-charge-fill text-warning"></i>
+                  <span>[SQL Optimizer] Injected partition window function & filtered Q3 dates</span>
+                </div>
+              </div>
+
+              <div class="sql-output-box">
+                <pre id="terminal-sql" style="margin: 0; white-space: pre-wrap; font-family: 'Fira Code', monospace;">SELECT c.customer_name,
+       SUM(o.order_total) AS total_q3_revenue,
+       DENSE_RANK() OVER (ORDER BY SUM(o.order_total) DESC) AS rank
+FROM customers c
+JOIN orders o ON c.id = o.customer_id
+WHERE o.order_date BETWEEN '2024-07-01' AND '2024-09-30'
+GROUP BY c.id, c.customer_name
+ORDER BY total_q3_revenue DESC LIMIT 5;</pre>
+              </div>
+
+              <div class="terminal-actions">
+                <button id="btn-next-query" class="btn-terminal">
+                  <i class="bi bi-arrow-repeat"></i> Try Next AI Prompt
+                </button>
+                <button id="btn-copy-query" class="btn-terminal">
+                  <i class="bi bi-clipboard"></i> Copy SQL
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section><!-- End About Section -->
+    </div>
+  </section>
 
-    <!-- ======= Services / Competencies Section ======= -->
-    <section id="skills-section" class="services-mf pt-5 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">
-                Core Competencies
-              </h3>
-              <p class="subtitle-a">
-                Areas of practical engineering and data expertise.
-              </p>
-              <div class="line-mf"></div>
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="glass-card text-center p-4">
+            <img src="testimonial-2.jpg" alt="Badipati Anil Kumar" class="rounded-circle mb-3 border border-2 border-info shadow" style="width: 140px; height: 140px; object-fit: cover;">
+            <h3 class="fw-bold mb-1">Badipati Anil Kumar</h3>
+            <p class="text-info small mb-3">Software Engineer & Data Analyst</p>
+            <p class="text-secondary small mb-3">Nehru Institute of Engineering & Technology, Coimbatore (B.E. CSE 2025)</p>
+            <div class="d-flex justify-content-center gap-2">
+              <span class="badge bg-dark border border-secondary text-light">Python</span>
+              <span class="badge bg-dark border border-secondary text-light">SQL / MySQL</span>
+              <span class="badge bg-dark border border-secondary text-light">Power BI</span>
+              <span class="badge bg-dark border border-secondary text-light">watsonx</span>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-database"></i></span>
+
+        <div class="col-lg-7">
+          <h2 class="section-title">About My Background</h2>
+          <p class="text-secondary mb-4">
+            I am a Computer Science graduate passionate about the intersection of software development, relational data architecture, and analytical intelligence.
+          </p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="milestone-box">
+                <div class="milestone-number">2026</div>
+                <div class="milestone-label">Algonex SQL & Python Intern</div>
               </div>
-              <div class="service-content">
-                <h2 class="s-title">SQL & Relational Databases</h2>
-                <p class="s-description text-center">
-                  Complex queries, multi-table joins, aggregations, subqueries, relational schema design, and performance indexing with MySQL.
-                </p>
+            </div>
+            <div class="col-sm-6">
+              <div class="milestone-box">
+                <div class="milestone-number">AWS</div>
+                <div class="milestone-label">Data Engineering Virtual Intern</div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-filetype-py"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Python Data Engineering</h2>
-                <p class="s-description text-center">
-                  ETL pipelines, data cleaning and transformation with Pandas and NumPy, exploratory data analysis, and script automation.
-                </p>
-              </div>
+
+          <p class="text-secondary">
+            During my internship at <strong>Algonex IT Solutions</strong>, I worked directly with relational database schemas, writing complex join and aggregation queries and automated Python data cleaning scripts. I am dedicated to writing clean, maintainable code and solving business problems with structured data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Competencies -->
+  <section id="skills" style="background: rgba(15, 23, 42, 0.4);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Technical Competencies</h2>
+        <p class="section-subtitle">Core skills in software engineering and data analytics.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-database"></i></div>
+            <h4 class="fw-bold mb-2">SQL & Relational DBs</h4>
+            <p class="text-secondary small mb-3">Schema normalization, multi-table joins, subqueries, index optimization, and relational data modeling with MySQL.</p>
+            <div class="skill-label"><span>MySQL Proficiency</span><span class="text-info">90%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-filetype-py"></i></div>
+            <h4 class="fw-bold mb-2">Python Data Engineering</h4>
+            <p class="text-secondary small mb-3">Data transformation and cleaning with Pandas and NumPy, data visualization with Matplotlib, and ETL scripting.</p>
+            <div class="skill-label"><span>Python / Pandas</span><span class="text-info">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-bar-chart-line"></i></div>
+            <h4 class="fw-bold mb-2">Power BI & Dashboards</h4>
+            <p class="text-secondary small mb-3">Completed Microsoft Learn Power BI series: Power Query data prep, DAX formulas, semantic modeling, and KPI tracking.</p>
+            <div class="skill-label"><span>Power BI & DAX</span><span class="text-info">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-robot"></i></div>
+            <h4 class="fw-bold mb-2">AI & Conversational Agents</h4>
+            <p class="text-secondary small mb-3">Configured and deployed web-chat virtual assistants on IBM watsonx Assistant with tailored dialog trees.</p>
+            <div class="skill-label"><span>IBM watsonx Assistant</span><span class="text-info">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-git"></i></div>
+            <h4 class="fw-bold mb-2">Git & Version Control</h4>
+            <p class="text-secondary small mb-3">Branching strategies, pull requests, resolving conflicts, and pair programming on agile engineering teams.</p>
+            <div class="skill-label"><span>Git & GitHub Workflows</span><span class="text-info">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card">
+            <div class="card-icon"><i class="bi bi-cloud-check"></i></div>
+            <h4 class="fw-bold mb-2">Cloud & Data Pipelines</h4>
+            <p class="text-secondary small mb-3">AWS Academy virtual internship fundamentals: cloud storage, automated pipeline concepts, and data lake principles.</p>
+            <div class="skill-label"><span>Cloud Fundamentals</span><span class="text-info">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Real codebases and engineering repositories.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Project 1: Vote Wallet -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-1.jpg" alt="Vote Wallet">
+              <span class="project-tag">Node.js + Merkle Tree</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">Node.js · Express · Merkle Ledger · SQLite</div>
+              <h4 class="project-title">Vote Wallet</h4>
+              <p class="project-desc">Cryptographic voting platform prototype implementing an RFC 6962 Merkle tree ledger with $O(\log N)$ inclusion proofs and decoupled voter-ballot secrecy.</p>
+              <a href="https://github.com/Anilkumar4516/vote-genz-wallet" target="_blank" rel="noopener" class="project-link">
+                View Repository <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-bar-chart-line"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Power BI & Dashboards</h2>
-                <p class="s-description text-center">
-                  End-to-end Power BI report design, Power Query transformation, DAX calculation formulas, semantic data modeling, and KPI tracking.
-                </p>
-              </div>
+        </div>
+
+        <!-- Project 2: AI SQL Analytics Assistant -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-5.jpg" alt="AI SQL Assistant">
+              <span class="project-tag">AI & SQL Analytics</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">Python · SQL · Prompt Engineering</div>
+              <h4 class="project-title">AI SQL Analytics Assistant</h4>
+              <p class="project-desc">Designed to convert everyday business questions into valid, read-only SQL queries with automated execution and structured insights.</p>
+              <a href="https://github.com/Anilkumar4516/ai-sql-analytics-assistant" target="_blank" rel="noopener" class="project-link">
+                View Repository <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-cloud-check"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">AWS & Cloud Fundamentals</h2>
-                <p class="s-description text-center">
-                  AWS Academy virtual internship training covering cloud fundamentals, storage services, data ingestion, and pipeline management.
-                </p>
-              </div>
+        </div>
+
+        <!-- Project 3: Smart Safety Factory -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-2.jpg" alt="Smart Safety Factory">
+              <span class="project-tag">IoT & Machine Learning</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">Python · IoT Sensors · ML Classification</div>
+              <h4 class="project-title">Smart Safety Crackers Factory</h4>
+              <p class="project-desc">Final-year major project designing an IoT safety monitoring system for firecracker manufacturing to detect hazards and trigger real-time alerts.</p>
+              <span class="text-secondary small"><i class="bi bi-award"></i> Major Engineering Project (2024-2025)</span>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-robot"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">AI & Conversational Agents</h2>
-                <p class="s-description text-center">
-                  Configuring and deploying virtual assistant chatbots using IBM watsonx Assistant with tailored dialogue flows and web-chat embedding.
-                </p>
-              </div>
+        </div>
+
+        <!-- Project 4: Future Sales Prediction -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-4.jpg" alt="Future Sales Prediction">
+              <span class="project-tag">Applied Data Science</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">Python · Pandas · Plotly · Regression</div>
+              <h4 class="project-title">Future Sales Prediction</h4>
+              <p class="project-desc">Applied data science milestone project predicting advertising revenue impacts across TV, Radio, and Newspaper with regression and Plotly visual trendlines.</p>
+              <a href="https://github.com/Anilkumar4516/Ibm_project" target="_blank" rel="noopener" class="project-link">
+                View Repository <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-git"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Git & Collaboration</h2>
-                <p class="s-description text-center">
-                  Version control best practices, branch management, pull requests, and collaborative pair programming in agile development workflows.
-                </p>
-              </div>
+        </div>
+
+        <!-- Project 5: IBM watsonx Assistant Chatbot -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-3.jpg" alt="Virtual Assistant Chatbot">
+              <span class="project-tag">Conversational AI</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">IBM watsonx Assistant · Watson Studio</div>
+              <h4 class="project-title">Virtual Assistant Chatbot</h4>
+              <p class="project-desc">Interactive virtual assistant configured with tailored customer intent flows, custom greeting actions, and web-chat embedding (try it in bottom-right!).</p>
+              <a href="https://github.com/Anilkumar4516/IBM-_Street-Food" target="_blank" rel="noopener" class="project-link">
+                View Integration <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Algonex Jobnex Platform -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <div class="project-img-box">
+              <img src="work-6.jpg" alt="Jobnex Platform">
+              <span class="project-tag">Full-Stack Contribution</span>
+            </div>
+            <div class="project-body">
+              <div class="project-tech">FastAPI · MySQL · React / Web Stack</div>
+              <h4 class="project-title">Jobnex Platform Contribution</h4>
+              <p class="project-desc">Contributed to resume parsing and skill gap evaluation database models and backend services during internship at Algonex IT Solutions.</p>
+              <a href="https://github.com/Anilkumar4516/JobNex--an-Algonex-product" target="_blank" rel="noopener" class="project-link">
+                View Repository <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section><!-- End Services Section -->
+    </div>
+  </section>
 
-    <!-- ======= Milestone Counter Section ======= -->
-    <div class="section-counter paralax-mf bg-image" style="background-image: url(counters-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container position-relative">
-        <div class="row">
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-mortarboard"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">2025</p>
-                <span class="counter-text">B.E. CSE GRADUATION</span>
-              </div>
-            </div>
+  <!-- Certifications Section -->
+  <section id="certifications" style="background: rgba(15, 23, 42, 0.4);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Certifications & Credentials</h2>
+        <p class="section-subtitle">Verified industry credentials and training programs.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="glass-card">
+            <span class="badge bg-primary mb-2">Microsoft Learn</span>
+            <h4 class="fw-bold mb-1">Prepare and Visualize Data with Power BI</h4>
+            <p class="text-info small mb-2">Completed Oct 2026</p>
+            <p class="text-secondary small mb-0">12 comprehensive modules: Power Query data transformation, DAX calculations, semantic modeling, report UX, and Copilot in Power BI.</p>
           </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-briefcase"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">2</p>
-                <span class="counter-text">PROFESSIONAL INTERNSHIPS</span>
-              </div>
-            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="glass-card">
+            <span class="badge bg-warning text-dark mb-2">Kaggle</span>
+            <h4 class="fw-bold mb-1">Python Coder Badge</h4>
+            <p class="text-info small mb-2">Earned Oct 2026</p>
+            <p class="text-secondary small mb-0">Hands-on problem solving badge validating proficiency in Python data structures, list comprehensions, and external libraries.</p>
           </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-patch-check"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">4</p>
-                <span class="counter-text">INDUSTRY CERTIFICATIONS</span>
-              </div>
-            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="glass-card">
+            <span class="badge bg-info text-dark mb-2">AICTE - EduSkills & AWS Academy</span>
+            <h4 class="fw-bold mb-1">Data Engineering Virtual Internship</h4>
+            <p class="text-info small mb-2">Sep 2023 – Nov 2023</p>
+            <p class="text-secondary small mb-0">10-week virtual internship covering cloud data storage, database design, and pipeline workflows supported by AWS Academy.</p>
           </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-code-slash"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">5+</p>
-                <span class="counter-text">ENGINEERING PROJECTS</span>
-              </div>
-            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="glass-card">
+            <span class="badge bg-secondary mb-2">IBM Career Education</span>
+            <h4 class="fw-bold mb-1">IBM Watson Studio Certification</h4>
+            <p class="text-info small mb-2">Aug 2024</p>
+            <p class="text-secondary small mb-0">Training on IBM Watson Studio environment for data preparation, model training, and analytical collaboration.</p>
           </div>
         </div>
       </div>
-    </div><!-- End Counter Section -->
+    </div>
+  </section>
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="work" class="portfolio-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">
-                Featured Projects
-              </h3>
-              <p class="subtitle-a">
-                Hands-on engineering, data analytics, and software applications.
-              </p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-1.jpg" alt="Vote Wallet" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Vote Wallet</h2>
-                    <p class="small text-muted mb-1">Node.js, Express, Merkle Tree, SQLite</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">Cryptographic Voting</span>
-                    </div>
-                    <p class="small text-secondary mt-1">Cryptographic voting ledger with RFC 6962 Merkle tree proofs and decoupled voter-ballot secrecy.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <a href="https://github.com/Anilkumar4516/vote-genz-wallet" target="_blank" rel="noopener"> <span class="bi bi-github"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="glass-card p-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="text-secondary mb-4">
+              I am open to Software Engineer (Python, SQL, data) and Data Analyst roles. Let's discuss how my technical skills can contribute to your team.
+            </p>
+            <div class="d-flex flex-column gap-2 text-secondary small">
+              <div><i class="bi bi-geo-alt text-info me-2"></i> Pullalacheruvu, Markapuram (Dt), Andhra Pradesh, India</div>
+              <div><i class="bi bi-envelope text-info me-2"></i> anilkumarbadipati4362@gmail.com</div>
+              <div><i class="bi bi-github text-info me-2"></i> <a href="https://github.com/Anilkumar4516" target="_blank" rel="noopener" class="text-info">github.com/Anilkumar4516</a></div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-2.jpg" alt="Smart Safety Factory" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Smart Safety Crackers Factory</h2>
-                    <p class="small text-muted mb-1">Python, IoT Sensors, Machine Learning</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">Major Final-Year Project</span>
-                    </div>
-                    <p class="small text-secondary mt-1">IoT-based safety monitoring system for firecracker manufacturing to detect hazards and trigger real-time alerts.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <span class="bi bi-shield-check"></span>
-                    </div>
-                  </div>
-                </div>
+          <div class="col-lg-6">
+            <form action="mailto:anilkumarbadipati4362@gmail.com" method="post" enctype="text/plain">
+              <div class="mb-3">
+                <input type="text" name="name" class="form-control bg-dark text-light border-secondary" placeholder="Your Name" required>
               </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-3.jpg" alt="Virtual Assistant" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Virtual Assistant Chatbot</h2>
-                    <p class="small text-muted mb-1">IBM watsonx Assistant, Web Integration</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">Conversational AI</span>
-                    </div>
-                    <p class="small text-secondary mt-1">Interactive web-chat virtual assistant built and deployed on IBM watsonx Assistant with custom conversation actions.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <span class="bi bi-chat-dots"></span>
-                    </div>
-                  </div>
-                </div>
+              <div class="mb-3">
+                <input type="email" name="email" class="form-control bg-dark text-light border-secondary" placeholder="Your Email" required>
               </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-4.jpg" alt="Future Sales Prediction" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Future Sales Prediction</h2>
-                    <p class="small text-muted mb-1">Python, Pandas, Plotly, Scikit-learn</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">IBM Applied Data Science</span>
-                    </div>
-                    <p class="small text-secondary mt-1">Predictive analysis modeling advertising budget impacts (TV, Radio, Newspaper) on revenue with regression and visual trendlines.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <a href="https://github.com/Anilkumar4516/Ibm_project" target="_blank" rel="noopener"> <span class="bi bi-github"></span></a>
-                    </div>
-                  </div>
-                </div>
+              <div class="mb-3">
+                <textarea name="message" rows="4" class="form-control bg-dark text-light border-secondary" placeholder="Message" required></textarea>
               </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-5.jpg" alt="AI SQL Analytics Assistant" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">AI SQL Analytics Assistant</h2>
-                    <p class="small text-muted mb-1">Python, SQL, LLM Prompting</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">Natural Language to SQL</span>
-                    </div>
-                    <p class="small text-secondary mt-1">Designed to convert everyday business questions into valid, read-only SQL queries with automated visual summaries.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <a href="https://github.com/Anilkumar4516/ai-sql-analytics-assistant" target="_blank" rel="noopener"> <span class="bi bi-github"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="work-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                <div class="work-img">
-                  <img src="work-6.jpg" alt="Algonex Jobnex" class="img-fluid">
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Jobnex Platform Contribution</h2>
-                    <p class="small text-muted mb-1">FastAPI, MySQL, Modern Web Stack</p>
-                    <div class="w-more">
-                      <span class="w-ctegory">Internship Team Project</span>
-                    </div>
-                    <p class="small text-secondary mt-1">Contributed to resume parsing and skill gap evaluation database models and backend services at Algonex IT Solutions.</p>
-                  </div>
-                  <div class="col-sm-2 text-end">
-                    <div class="w-like">
-                      <span class="bi bi-laptop"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <button type="submit" class="btn-glow-primary w-100 justify-content-center">
+                <i class="bi bi-send"></i> Send Message
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </section><!-- End Portfolio Section -->
+    </div>
+  </section>
 
-    <!-- ======= Education & Certifications Section ======= -->
-    <section id="certifications" class="blog-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">
-                Education & Certifications
-              </h3>
-              <p class="subtitle-a">
-                Academic foundation and industry-verified credentials.
-              </p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <div class="card card-blog h-100">
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Education</h6>
-                  </div>
-                </div>
-                <h3 class="card-title">B.E. Computer Science and Engineering</h3>
-                <p class="card-description">
-                  <strong>Nehru Institute of Engineering and Technology, Coimbatore</strong> (2021 – 2025)<br>
-                  Graduated with 73.4% aggregate. Focused on database management systems, data structures, algorithm design, and software engineering.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-4">
-            <div class="card card-blog h-100">
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Certification</h6>
-                  </div>
-                </div>
-                <h3 class="card-title">Microsoft Power BI Learning Series</h3>
-                <p class="card-description">
-                  <strong>Microsoft Learn (Oct 2026)</strong><br>
-                  Completed 12 comprehensive modules covering data extraction, Power Query transformation, semantic modeling, DAX calculations, report UX enhancement, and Power BI Copilot.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-4">
-            <div class="card card-blog h-100">
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Certification</h6>
-                  </div>
-                </div>
-                <h3 class="card-title">Python Coder Badge & Data Analytics</h3>
-                <p class="card-description">
-                  <strong>Kaggle Python Coder (Oct 2026)</strong> & <strong>LearnTube Data Analytics (Mar 2024)</strong><br>
-                  Practical problem-solving badges validating proficiency in Python, array manipulation, data cleaning, and statistical summarization.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-4">
-            <div class="card card-blog h-100">
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Certification</h6>
-                  </div>
-                </div>
-                <h3 class="card-title">IBM Watson Studio & AWS Data Engineering</h3>
-                <p class="card-description">
-                  <strong>IBM Career Education Program (Aug 2024)</strong> & <strong>AICTE-EduSkills AWS Academy (Sep – Nov 2023)</strong><br>
-                  Hands-on completion of virtual internships and certificates covering Watson Studio tools and AWS cloud data engineering fundamentals.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Education Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(overlay-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="contact-mf">
-              <div class="box-shadow-full">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="title-box-2">
-                      <h5 class="title-left">
-                        Send a Message
-                      </h5>
-                    </div>
-                    <div>
-                      <form action="mailto:anilkumarbadipati4362@gmail.com" method="post" enctype="text/plain">
-                        <div class="row">
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-center my-3">
-                            <button type="submit" class="button button-a button-big button-rouded">Send Email</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="title-box-2 pt-4 pt-md-0">
-                      <h5 class="title-left">
-                        Get in Touch
-                      </h5>
-                    </div>
-                    <div class="more-info">
-                      <p class="lead">
-                        I am currently open to Software Engineer (Python, SQL, data) and Data Analyst roles. Feel free to connect via email or GitHub.
-                      </p>
-                      <ul class="list-ico">
-                        <li><span class="bi bi-geo-alt"></span> Pullalacheruvu, Markapuram (Dt), Andhra Pradesh, India</li>
-                        <li><span class="bi bi-envelope"></span> anilkumarbadipati4362@gmail.com</li>
-                      </ul>
-                    </div>
-                    <div class="socials">
-                      <ul>
-                        <li><a href="https://github.com/Anilkumar4516" target="_blank" rel="noopener"><span class="ico-circle"><i class="bi bi-github"></i></span></a></li>
-                        <li><a href="mailto:anilkumarbadipati4362@gmail.com"><span class="ico-circle"><i class="bi bi-envelope"></i></span></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+  <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="copyright-box">
-            <p class="copyright">&copy; Copyright <strong>Badipati Anil Kumar</strong>. All Rights Reserved</p>
-            <div class="credits">
-              <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
-            -->
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="mb-1">&copy; 2026 Badipati Anil Kumar. All Rights Reserved.</p>
+      <p class="small text-muted mb-0">
+        Template based on <a href="https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/" target="_blank" rel="noopener">DevFolio</a> by BootstrapMade.
+      </p>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Vanilla JS Scripts: Interactive AI Neural Mesh & Typing Animation -->
+  <script>
+    // 1. Typewriter Subtitle Animation
+    const roles = [
+      "Software Engineer (Python & SQL)",
+      "Data Analyst | Power BI & DAX",
+      "Relational Database Developer",
+      "AI & Data Engineering Enthusiast"
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typeSpeed = 90;
+    const eraseSpeed = 45;
+    const delayBetween = 1600;
+    const textTarget = document.getElementById("typewriter-text");
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+    function typeLoop() {
+      const currentRole = roles[roleIdx];
+      if (isDeleting) {
+        textTarget.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        textTarget.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+      }
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+      let timeout = isDeleting ? eraseSpeed : typeSpeed;
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        timeout = delayBetween;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        timeout = 300;
+      }
+
+      setTimeout(typeLoop, timeout);
+    }
+    typeLoop();
+
+    // 2. Interactive AI Neural Particle Canvas Background
+    const canvas = document.getElementById('ai-neural-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 140 };
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function resizeCanvas() {
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+      initParticles();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.9;
+        this.vy = (Math.random() - 0.5) * 0.9;
+        this.radius = Math.random() * 2.2 + 1.2;
+        this.pulse = Math.random() * Math.PI;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulse += 0.03;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        // Mouse interaction: gravitate slightly toward cursor
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x += (dx / dist) * force * 1.5;
+            this.y += (dy / dist) * force * 1.5;
+          }
+        }
+      }
+
+      draw() {
+        const glow = Math.sin(this.pulse) * 0.4 + 0.6;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${0.5 * glow})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.min(Math.floor((width * height) / 11000), 75);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function renderNeuralMesh() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect nodes with synaptic filaments
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 130;
+
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * 0.28;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw cursor connections
+      if (mouse.x !== null && mouse.y !== null) {
+        for (let i = 0; i < particles.length; i++) {
+          const dx = mouse.x - particles[i].x;
+          const dy = mouse.y - particles[i].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const alpha = (1 - dist / mouse.radius) * 0.45;
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(renderNeuralMesh);
+    }
+
+    resizeCanvas();
+    renderNeuralMesh();
+
+    // 3. Interactive AI SQL Query Simulator
+    const queries = [
+      {
+        prompt: '"Calculate customer cohort retention and top 5 revenue contributors in Q3"',
+        steps: [
+          "[NLP Encoder] Tokenized intent & mapped entities -> 'customers', 'orders'",
+          "[Schema Graph] Inferred foreign keys: customers.id = orders.customer_id",
+          "[SQL Optimizer] Injected partition window function & filtered Q3 dates"
+        ],
+        sql: `SELECT c.customer_name,
+       SUM(o.order_total) AS total_q3_revenue,
+       DENSE_RANK() OVER (ORDER BY SUM(o.order_total) DESC) AS rank
+FROM customers c
+JOIN orders o ON c.id = o.customer_id
+WHERE o.order_date BETWEEN '2024-07-01' AND '2024-09-30'
+GROUP BY c.id, c.customer_name
+ORDER BY total_q3_revenue DESC LIMIT 5;`
+      },
+      {
+        prompt: '"Find products with low inventory stock running below 14-day average sales volume"',
+        steps: [
+          "[NLP Encoder] Identified aggregate metric '14-day rolling average' & threshold",
+          "[Schema Graph] Joined 'products' with 'inventory_snapshots'",
+          "[SQL Optimizer] Constructed CTE with subquery condition for stockout risk"
+        ],
+        sql: `WITH daily_velocity AS (
+    SELECT product_id, AVG(quantity_sold) AS avg_14d_sales
+    FROM sales_history
+    WHERE sale_date >= CURRENT_DATE - INTERVAL 14 DAY
+    GROUP BY product_id
+)
+SELECT p.product_name, p.current_stock, dv.avg_14d_sales
+FROM products p
+JOIN daily_velocity dv ON p.id = dv.product_id
+WHERE p.current_stock < (dv.avg_14d_sales * 14)
+ORDER BY (p.current_stock / NULLIF(dv.avg_14d_sales, 0)) ASC;`
+      },
+      {
+        prompt: '"Extract monthly skill match gap distribution for FastAPI and Python roles"',
+        steps: [
+          "[NLP Encoder] Detected multi-skill keyword filter & candidate matching score",
+          "[Schema Graph] Linked 'candidate_skills' table to 'job_descriptions'",
+          "[SQL Optimizer] Grouped by calendar month with percentage aggregations"
+        ],
+        sql: `SELECT DATE_FORMAT(analyzed_at, '%Y-%m') AS report_month,
+       COUNT(*) AS total_resumes_analyzed,
+       ROUND(AVG(compatibility_score), 2) AS avg_match_rate,
+       SUM(CASE WHEN missing_skills LIKE '%FastAPI%' THEN 1 ELSE 0 END) AS fastapi_gap_count
+FROM resume_analyses
+WHERE target_role LIKE '%Python%'
+GROUP BY report_month
+ORDER BY report_month DESC;`
+      }
+    ];
+
+    let currentQueryIdx = 0;
+    const promptEl = document.getElementById('terminal-prompt');
+    const pipelineEl = document.getElementById('terminal-pipeline');
+    const sqlEl = document.getElementById('terminal-sql');
+    const btnNext = document.getElementById('btn-next-query');
+    const btnCopy = document.getElementById('btn-copy-query');
+
+    btnNext.addEventListener('click', () => {
+      currentQueryIdx = (currentQueryIdx + 1) % queries.length;
+      const q = queries[currentQueryIdx];
+
+      // Smooth transition animation
+      promptEl.style.opacity = '0';
+      sqlEl.style.opacity = '0';
+
+      setTimeout(() => {
+        promptEl.textContent = q.prompt;
+        pipelineEl.innerHTML = q.steps.map(s => `
+          <div class="ai-pipeline-step">
+            <i class="bi bi-check2-circle text-success"></i>
+            <span>${s}</span>
+          </div>
+        `).join('');
+        sqlEl.textContent = q.sql;
+
+        promptEl.style.transition = 'opacity 0.4s ease';
+        sqlEl.style.transition = 'opacity 0.4s ease';
+        promptEl.style.opacity = '1';
+        sqlEl.style.opacity = '1';
+      }, 200);
+    });
+
+    btnCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(sqlEl.textContent).then(() => {
+        btnCopy.innerHTML = '<i class="bi bi-check2"></i> Copied!';
+        setTimeout(() => {
+          btnCopy.innerHTML = '<i class="bi bi-clipboard"></i> Copy SQL';
+        }, 1800);
+      });
+    });
+  </script>
 
 </body>
-
 </html>
